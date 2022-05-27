@@ -1,0 +1,27 @@
+services:
+  nodejs:
+    container_name: desafio-tech-backend
+    image: node:16
+    ports:
+      - "${BACKEND_PORT}:3000"
+    command: 'npm run start:dev'
+    volumes:
+      - .:/app/node
+    working_dir: /app/node
+    depends_on:
+      - database
+
+  database:
+    container_name: desafio-tech-database
+    image: mysql
+    ports:
+      - "${MYSQL_PORT}:3306"
+    env_file:
+      - ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    security_opt:
+    - seccomp:unconfined
