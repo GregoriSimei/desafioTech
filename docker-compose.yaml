@@ -1,0 +1,11 @@
+services:
+  nodejs:
+    container_name: ${NODE_SERVER_NAME}
+    image: node:16
+    ports:
+      - "3000:3000"
+    command: 'npm run start:dev'
+
+    volumes:
+      - .:/app/node
+    working_dir: /app/node
