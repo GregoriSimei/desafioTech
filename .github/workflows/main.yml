@@ -1,0 +1,55 @@
+name: CI - Desafio Tech - Node - Tests
+
+on:
+  push: 
+    branches:
+      - task/*
+      - bugfix/*
+      
+  pull_request:
+    branches:
+      - main
+      - task/*
+      - bugfix/*
+ 
+env:
+  MYSQL_USER: root
+  MYSQL_ROOT_PASSWORD: rootgit123
+  MYSQL_DATABASE: git_actions_db
+  MYSQL_PORT: 3306
+  BACKEND_PORT: 3000
+  
+jobs:
+  tests: 
+    name: Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+      
+    strategy:
+      matrix:
+        node_version: ['16']
+        os: [ubuntu-latest]
+        mysql-version: ['4.4']
+        
+        
+    steps:
+    - name: Git Checkout
+      uses: actions/checkout@v1
+      
+    - name: Use Node.js VERSION ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with: 
+        node-version: ${{ matrix.node-version }}
+      
+    - name: Start MySQL
+      uses: samin/mysql-action@4dd1210f1d6b9c2468adec44066ef4a97b8f07f3
+      with:
+        mysql verion: '8.0'
+        mysql root password: ${{ env.MYSQL_ROOT_PASSWORD }}
+        mysql user: ${{ env.MYSQL_USER }}
+        mysql database: ${{ env.MYSQL_DATABASE }}
+      
+    - name: Install dependences and run tests
+      run: npm install
+      
+    - name: Run tests
+      run: npm run test
