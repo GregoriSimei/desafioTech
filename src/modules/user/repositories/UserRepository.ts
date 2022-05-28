@@ -7,7 +7,6 @@ import { BinaryLike, pbkdf2Sync } from 'crypto';
 export class UserRepository implements IUserRepository {
   private hashSalt: BinaryLike = process.env.PASS_HASH_SALT as string;
   private hashIteration: number = parseInt(process.env.PASS_HASH_ITERATION);
-  private hashLength: number = parseInt(process.env.PASS_HASH_LEN);
   private hashType: string = process.env.PASS_HASH_TYPE as string;
 
   constructor(
@@ -30,7 +29,7 @@ export class UserRepository implements IUserRepository {
       password,
       this.hashSalt,
       this.hashIteration,
-      this.hashLength,
+      64,
       this.hashType,
     ).toString('hex');
 
@@ -45,7 +44,7 @@ export class UserRepository implements IUserRepository {
       password,
       this.hashSalt,
       this.hashIteration,
-      this.hashLength,
+      64,
       this.hashType,
     ).toString('hex');
 
