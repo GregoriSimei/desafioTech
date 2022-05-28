@@ -2,6 +2,8 @@ services:
   nodejs:
     container_name: desafio-tech-backend
     image: node:16
+    env_file:
+      - ./.env
     ports:
       - "${BACKEND_PORT}:3000"
     command: 'npm run start:dev'
@@ -13,11 +15,12 @@ services:
 
   database:
     container_name: desafio-tech-database
-    image: mysql
+    image: mysql:8
     ports:
-      - "${MYSQL_PORT}:3306"
+      - ${MYSQL_PORT_OS}:${MYSQL_PORT}
     env_file:
       - ./.env
+    command: --default-authentication-plugin=mysql_native_password
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_USER=${MYSQL_USER}
