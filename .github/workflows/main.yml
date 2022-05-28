@@ -1,4 +1,4 @@
-name: CI - Desafio Tech - Node - Tests
+name: CI - Desafio Tech - Node - Quality Check
 
 on:
   push: 
@@ -20,7 +20,7 @@ env:
   BACKEND_PORT: 3000
   
 jobs:
-  tests: 
+  quality: 
     name: Test on Node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
       
@@ -53,3 +53,6 @@ jobs:
       
     - name: Run tests
       run: npm run test
+      
+    - name: Check Lint - code pattern
+      run: npm run lint:check
