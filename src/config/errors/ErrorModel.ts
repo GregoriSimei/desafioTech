@@ -1,5 +1,10 @@
+import { ApiProperty } from '@nestjs/swagger';
+
 export class ErrorModel {
+  @ApiProperty()
   protected message: string;
+
+  @ApiProperty()
   protected status: number;
 
   constructor(message: string, status: number) {
