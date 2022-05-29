@@ -1,6 +1,7 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { Routes } from './app.routes';
 import { UserModule } from './modules/user/user.module';
+import { EnsureAuthenticated } from './shared/middlewares/EnsureAuthenticated';
 import { GlobalModule } from './shared/NestModules/global.module';
 
 @Module({
@@ -8,4 +9,11 @@ import { GlobalModule } from './shared/NestModules/global.module';
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(EnsureAuthenticated)
+      .exclude('/desafiotech/login')
+      .forRoutes('/desafiotech');
+  }
+}
