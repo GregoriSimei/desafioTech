@@ -1,4 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { Routes } from './app.routes';
 import { UserModule } from './modules/user/user.module';
 import { EnsureAuthenticated } from './shared/middlewares/EnsureAuthenticated';
@@ -13,7 +18,10 @@ export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(EnsureAuthenticated)
-      .exclude('/desafiotech/login')
+      .exclude(
+        { path: '/desafiotech/user', method: RequestMethod.POST },
+        { path: '/desafiotech/user/login', method: RequestMethod.ALL },
+      )
       .forRoutes('/desafiotech');
   }
 }
