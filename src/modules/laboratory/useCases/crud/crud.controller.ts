@@ -11,7 +11,7 @@ import { CreateLaboratoryService } from './services/create.aboratory.service';
 @ApiTags('Laboratory: CRUD')
 @ApiResponse({ type: BadRequest, status: 400 })
 @ApiResponse({ type: ErrorModel, status: 500 })
-export class CrudController {
+export class CrudLaboratoryController {
   constructor(private readonly createUserService: CreateLaboratoryService) {}
 
   @Post()
