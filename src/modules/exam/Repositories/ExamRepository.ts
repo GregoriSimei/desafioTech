@@ -19,4 +19,8 @@ export class ExamRepository implements IExamRepository {
   async remove(examId: number): Promise<void> {
     await this.examRepository.delete(examId);
   }
+
+  async findById(examId: number): Promise<ExamDTO> {
+    return this.examRepository.findOneBy({ id: examId });
+  }
 }
