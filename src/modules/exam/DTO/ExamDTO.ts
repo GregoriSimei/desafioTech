@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { LaboratoryDTO } from './LaboratoryDTO';
 
 export class ExamDTO {
   @ApiProperty()
@@ -13,9 +12,6 @@ export class ExamDTO {
 
   @ApiProperty()
   status: boolean;
-
-  @ApiProperty()
-  laboratory?: LaboratoryDTO;
 
   @ApiProperty()
   created_at?: Date;
