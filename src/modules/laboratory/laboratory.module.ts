@@ -9,6 +9,7 @@ import { FindLaboratoryService } from './useCases/crud/services/find.laboratory.
 import { UpdateLaboratoryService } from './useCases/crud/services/update.laboratory.service';
 import { CrudExamController } from './useCases/crudExam/crud.exam.controller';
 import { CreateExamService } from './useCases/crudExam/services/create.exam.service';
+import { FindExamService } from './useCases/crudExam/services/find.exam.service';
 
 @Module({
   imports: [GlobalModule],
@@ -19,6 +20,7 @@ import { CreateExamService } from './useCases/crudExam/services/create.exam.serv
     FindLaboratoryService,
     DeleteLaboratoryService,
     CreateExamService,
+    FindExamService,
     {
       provide: 'REPOSITORY_LABORATORY',
       useClass: LaboratoryRepository,

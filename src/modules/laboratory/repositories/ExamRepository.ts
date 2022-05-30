@@ -29,19 +29,13 @@ export class ExamRepository implements IExamRepository {
     return examCreated;
   }
 
-  async update(laboratoryId: number, exam: ExamDTO): Promise<ExamDTO> {
-    throw new Error('Method not implemented.');
-  }
-
   async findAll(laboratoryId: number): Promise<ExamDTO[]> {
-    throw new Error('Method not implemented.');
+    const laboratory = await this.findLaboratory(laboratoryId);
+    return laboratory.exams;
   }
 
-  async findById(examId: number): Promise<ExamDTO> {
-    throw new Error('Method not implemented.');
-  }
-
-  async remove(examId: number): Promise<void> {
-    throw new Error('Method not implemented.');
+  async findById(laboratoryId: number, examId: number): Promise<ExamDTO> {
+    const laboratory = await this.findLaboratory(laboratoryId);
+    return laboratory.exams.find((it) => it.id == examId);
   }
 }
