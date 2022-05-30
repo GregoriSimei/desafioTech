@@ -15,7 +15,7 @@ export class LaboratoryDTO {
   phone: string;
 
   @ApiProperty()
-  exams: ExamDTO[];
+  exams?: ExamDTO[];
 
   @ApiProperty()
   created_at?: Date;
