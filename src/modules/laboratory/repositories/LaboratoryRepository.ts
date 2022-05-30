@@ -11,7 +11,7 @@ export class LaboratoryRepository implements ILaboratoryRepository {
   ) {}
 
   create(laboratory: LaboratoryDTO): Promise<LaboratoryDTO> {
-    throw new Error('Method not implemented.');
+    return this.laboratoryRepository.save(laboratory);
   }
   update(laboratory: LaboratoryDTO): Promise<LaboratoryDTO> {
     throw new Error('Method not implemented.');
