@@ -27,7 +27,7 @@ export class LaboratoryRepository implements ILaboratoryRepository {
     return this.laboratoryRepository.findOneBy({ id: laboratoryId });
   }
 
-  async remove(laboratoryId: string): Promise<void> {
-    throw new Error('Method not implemented.');
+  async remove(laboratoryId: number): Promise<void> {
+    await this.laboratoryRepository.delete(laboratoryId);
   }
 }
