@@ -8,7 +8,7 @@ export class DeleteExamService {
     private examRepository: IExamRepository,
   ) {}
 
-  async findExam(examId: number): Promise<void> {
+  async deleteExam(examId: number): Promise<void> {
     await this.examRepository.remove(examId);
   }
 }
