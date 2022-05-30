@@ -12,4 +12,4 @@ import { LaboratoryRepository } from './repositories/LaboratoryRepository';
     },
   ],
 })
-export class UserModule {}
+export class LaboratoryModule {}
