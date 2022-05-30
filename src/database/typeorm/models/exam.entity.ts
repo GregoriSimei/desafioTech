@@ -1,5 +1,12 @@
 import { IExam } from 'src/database/models/IExam';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Laboratory } from './laboratory.entity';
 
 @Entity('exams')
@@ -18,4 +25,10 @@ export class Exam implements IExam {
 
   @ManyToOne(() => Laboratory, (laboratory) => laboratory.exams)
   laboratory: Laboratory;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }

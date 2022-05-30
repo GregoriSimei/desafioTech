@@ -1,6 +1,12 @@
-import { IExam } from 'src/database/models/IExam';
 import { ILaboratory } from 'src/database/models/ILaboratory';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { Exam } from './exam.entity';
 
 @Entity('laboratories')
@@ -19,4 +25,10 @@ export class Laboratory implements ILaboratory {
 
   @OneToMany(() => Exam, (exam) => exam.laboratory)
   exams: Exam[];
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 }
