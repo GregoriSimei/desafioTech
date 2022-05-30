@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { IExamRepository } from 'src/modules/exam/Repositories/IExamRepository';
+import { IExamRepository } from 'src/modules/exam/repositories/IExamRepository';
 
 @Injectable()
 export class DeleteExamService {

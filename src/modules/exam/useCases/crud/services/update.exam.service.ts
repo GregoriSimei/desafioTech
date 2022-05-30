@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ExamDTO } from 'src/modules/exam/DTO/ExamDTO';
 import { UpdateExamDTO } from 'src/modules/exam/DTO/UpdateExamDTO';
-import { IExamRepository } from 'src/modules/exam/Repositories/IExamRepository';
+import { IExamRepository } from 'src/modules/exam/repositories/IExamRepository';
 import { BadRequest } from 'src/shared/DTO/BadRequest';
 
 @Injectable()
