@@ -13,16 +13,21 @@ export class LaboratoryRepository implements ILaboratoryRepository {
   create(laboratory: LaboratoryDTO): Promise<LaboratoryDTO> {
     return this.laboratoryRepository.save(laboratory);
   }
-  update(laboratory: LaboratoryDTO): Promise<LaboratoryDTO> {
+
+  async update(laboratory: LaboratoryDTO): Promise<LaboratoryDTO> {
+    await this.laboratoryRepository.update(laboratory.id, laboratory);
+    return this.findById(laboratory.id);
+  }
+
+  async findAll(): Promise<LaboratoryDTO[]> {
     throw new Error('Method not implemented.');
   }
-  findAll(): Promise<LaboratoryDTO[]> {
-    throw new Error('Method not implemented.');
+
+  async findById(laboratoryId: number): Promise<LaboratoryDTO> {
+    return this.laboratoryRepository.findOneBy({ id: laboratoryId });
   }
-  findById(laboratoryId: string): Promise<LaboratoryDTO> {
-    throw new Error('Method not implemented.');
-  }
-  remove(laboratoryId: string): Promise<void> {
+
+  async remove(laboratoryId: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
 }
