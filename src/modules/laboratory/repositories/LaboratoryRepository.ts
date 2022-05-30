@@ -20,11 +20,16 @@ export class LaboratoryRepository implements ILaboratoryRepository {
   }
 
   async findAll(): Promise<LaboratoryDTO[]> {
-    return this.laboratoryRepository.find({});
+    return this.laboratoryRepository.find({ relations: ['exams'] });
   }
 
   async findById(laboratoryId: number): Promise<LaboratoryDTO> {
-    return this.laboratoryRepository.findOneBy({ id: laboratoryId });
+    return this.laboratoryRepository.findOne({
+      relations: ['exams'],
+      where: {
+        id: laboratoryId,
+      },
+    });
   }
 
   async remove(laboratoryId: number): Promise<void> {
