@@ -20,7 +20,7 @@ export class LaboratoryRepository implements ILaboratoryRepository {
   }
 
   async findAll(): Promise<LaboratoryDTO[]> {
-    throw new Error('Method not implemented.');
+    return this.laboratoryRepository.find({});
   }
 
   async findById(laboratoryId: number): Promise<LaboratoryDTO> {
