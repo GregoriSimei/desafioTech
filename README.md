@@ -77,3 +77,13 @@ PASS_HASH_TYPE= # Tipo de criptografia, Ex: sha512
 
 JWT_SECRET= # qualquer chave segredo para validação do, Ex: JWT5d8ba383526af097fe0790c53e915a3886ca93ec
 ```
+
+</br>
+
+Após a criação do arquivo de variáveis de ambiente, execute o seguinte comando:
+
+```bash
+docker-compose up
+```
+
+***Note***: Ele será responsável pela criação dos containers Docker e execução do ambiente de `dev`.
