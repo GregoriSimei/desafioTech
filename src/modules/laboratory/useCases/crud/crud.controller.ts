@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Req, Res } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Put, Req, Res } from '@nestjs/common';
 import { ApiBody, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { BadRequest } from 'src/shared/DTO/BadRequest';
@@ -9,6 +9,7 @@ import { CreateLaboratoryService } from './services/create.aboratory.service';
 import { UpdateLaboratoryDTO } from '../../DTOs/UpdateLaboratoryDTO';
 import { UpdateLaboratoryService } from './services/update.laboratory.service';
 import { FindLaboratoryService } from './services/find.laboratory.service';
+import { DeleteLaboratoryService } from './services/delete.laboratory.service';
 
 @Controller()
 @ApiTags('Laboratory: CRUD')
@@ -19,6 +20,7 @@ export class CrudLaboratoryController {
     private readonly createLaboratoryService: CreateLaboratoryService,
     private readonly updateLaboratoryService: UpdateLaboratoryService,
     private readonly findLaboratoryService: FindLaboratoryService,
+    private readonly deleteLaboratoryService: DeleteLaboratoryService,
   ) {}
 
   @Post()
@@ -66,6 +68,22 @@ export class CrudLaboratoryController {
       laboratoryId,
     );
 
-    return response.status(201).json(responseData);
+    return response.status(200).json(responseData);
+  }
+
+  @Delete()
+  @ApiQuery({ name: 'id' })
+  @ApiResponse({ status: 200 })
+  async deleteLaboratory(
+    @Req() request: Request,
+    @Res() response: Response,
+  ): Promise<Response> {
+    const laboratoryId: number = request.query.id as unknown as number;
+
+    const responseData = await this.deleteLaboratoryService.deleteLaboratory(
+      laboratoryId,
+    );
+
+    return response.status(200).json(responseData);
   }
 }
