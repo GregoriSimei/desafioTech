@@ -1,5 +1,5 @@
-import { Controller, Post, Put, Req, Res } from '@nestjs/common';
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Post, Put, Req, Res } from '@nestjs/common';
+import { ApiBody, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request, Response } from 'express';
 import { BadRequest } from 'src/shared/DTO/BadRequest';
 import { ErrorModel } from 'src/config/errors/ErrorModel';
@@ -8,6 +8,7 @@ import { CreateLaboratoryDTO } from '../../DTOs/CreateLaboratoryDTO';
 import { CreateLaboratoryService } from './services/create.aboratory.service';
 import { UpdateLaboratoryDTO } from '../../DTOs/UpdateLaboratoryDTO';
 import { UpdateLaboratoryService } from './services/update.laboratory.service';
+import { FindLaboratoryService } from './services/find.laboratory.service';
 
 @Controller()
 @ApiTags('Laboratory: CRUD')
@@ -17,6 +18,7 @@ export class CrudLaboratoryController {
   constructor(
     private readonly createLaboratoryService: CreateLaboratoryService,
     private readonly updateLaboratoryService: UpdateLaboratoryService,
+    private readonly findLaboratoryService: FindLaboratoryService,
   ) {}
 
   @Post()
@@ -37,7 +39,7 @@ export class CrudLaboratoryController {
 
   @Put()
   @ApiBody({ type: UpdateLaboratoryDTO })
-  @ApiResponse({ type: LaboratoryDTO, status: 201 })
+  @ApiResponse({ type: LaboratoryDTO, status: 200 })
   async updateLaboratory(
     @Req() request: Request,
     @Res() response: Response,
@@ -46,6 +48,22 @@ export class CrudLaboratoryController {
 
     const responseData = await this.updateLaboratoryService.updateLaboratory(
       body,
+    );
+
+    return response.status(200).json(responseData);
+  }
+
+  @Get()
+  @ApiQuery({ name: 'id', required: false })
+  @ApiResponse({ type: LaboratoryDTO, status: 200 })
+  async getLaboratory(
+    @Req() request: Request,
+    @Res() response: Response,
+  ): Promise<Response> {
+    const laboratoryId: number = request.query.id as unknown as number;
+
+    const responseData = await this.findLaboratoryService.getLaboratory(
+      laboratoryId,
     );
 
     return response.status(201).json(responseData);
